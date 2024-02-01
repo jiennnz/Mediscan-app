@@ -10,10 +10,6 @@ export function middleware(request: NextRequest) {
   const apiPath = path.includes("/api");
   const token = request.cookies.get("token")?.value || "";
 
-  if (path.includes("/dashboard")) {
-    return;
-  }
-
   if (apiPath) {
     return;
   }
