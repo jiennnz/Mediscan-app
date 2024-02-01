@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Cabin } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-const cabin = Cabin({ subsets: ["latin"] });
+
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AuthProvider } from "@/context/contexts";
+
+const cabin = Cabin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MediScan",
@@ -18,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cabin.className}>
-        <Toaster position="top-center" />
-        {children}
-        <SpeedInsights />
+        <AuthProvider>
+          <Toaster position="top-center" />
+          {children}
+          <SpeedInsights />
+        </AuthProvider>
       </body>
     </html>
   );

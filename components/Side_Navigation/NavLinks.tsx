@@ -19,14 +19,14 @@ const NavLinks = () => {
   const changePage = (page: NavComponents, index: number) => {
     setLinePosition(index);
     setStartY(linePosition * 64);
-    setEndY(index * 64);
+    setEndY(index * 63);
     setPage(page);
   };
 
   const IsActiveLine = () => {
     return (
       <div
-        className="active-line absolute mt-[2px] h-[24px] border-[3px] border-blue"
+        className="active-line absolute  h-[47px] border-[3px] border-blue"
         style={
           {
             "--startY": `${startY}px`,
@@ -38,98 +38,117 @@ const NavLinks = () => {
   };
 
   return (
-    <section className="relative flex gap-x-[64px]">
+    <section className="relative flex h-full pt-[32px]">
       <div>
         <IsActiveLine />
       </div>
-      <div className="flex flex-col gap-y-[32px]">
+      <div className=" flex h-full w-full flex-col gap-y-[16px]">
+        {/* DASHBOARD */}
         <button
+          className={clsx(
+            "group flex h-[47px] w-full",
+            page === "dashboard" ? "bg-sky-100" : "",
+          )}
           onClick={() => changePage("dashboard", 0)}
-          className="group flex w-full  items-center gap-x-[16px]"
         >
-          <DashboardIcon
-            className={clsx(
-              "h-[24px] w-[24px] stroke-[2px] group-hover:stroke-blue",
-              page === "dashboard" ? "stroke-blue" : "stroke-black50",
-            )}
-          />
-          <h1
-            className={clsx(
-              "text-p font-semibold group-hover:text-blue",
-              page === "dashboard" ? "text-blue" : "text-black50",
-            )}
-          >
-            Dashboard
-          </h1>
+          <div className="ml-[64px] flex items-center gap-x-[24px]">
+            <DashboardIcon
+              className={clsx(
+                "h-[26px] w-[26px]  stroke-[2px] group-hover:stroke-blue",
+                page === "dashboard" ? "stroke-blue" : "stroke-black50",
+              )}
+            />
+            <h1
+              className={clsx(
+                "text-p font-bold group-hover:text-black",
+                page === "dashboard" ? "text-black" : "text-black50",
+              )}
+            >
+              Overview
+            </h1>
+          </div>
         </button>
 
+        {/* DIAGNOSE */}
         <button
+          className={clsx(
+            "group flex h-[47px] w-full",
+            page === "diagnose" ? "bg-sky-100" : "",
+          )}
           onClick={() => changePage("diagnose", 1)}
-          className="group flex w-full  items-center gap-x-[16px]"
         >
-          <DiagnoseIcon
-            className={clsx(
-              "h-[px] w-[24px]",
-              page === "diagnose"
-                ? "fill-blue stroke-blue"
-                : "fill-black50 stroke-black50",
-              "group-hover:fill-blue group-hover:stroke-blue",
-            )}
-          />
-          <h1
-            className={clsx(
-              "text-p font-semibold group-hover:text-blue",
-              page === "diagnose" ? "text-blue" : "text-black50",
-            )}
-          >
-            Diagnose
-          </h1>
+          <div className="ml-[64px] flex items-center gap-x-[24px]">
+            <DiagnoseIcon
+              className={clsx(
+                "h-[26px] w-[26px] group-hover:fill-blue group-hover:stroke-blue",
+                page === "diagnose"
+                  ? "fill-blue stroke-blue"
+                  : "fill-black50 stroke-black50",
+              )}
+            />
+            <h1
+              className={clsx(
+                "text-p font-bold group-hover:text-black",
+                page === "diagnose" ? "text-black" : "text-black50",
+              )}
+            >
+              Diagnose
+            </h1>
+          </div>
         </button>
 
+        {/* USER GUIDE */}
         <button
+          className={clsx(
+            "group flex h-[47px] w-full",
+            page === "userGuide" ? "bg-sky-100" : "",
+          )}
           onClick={() => changePage("userGuide", 2)}
-          className="group flex w-full  items-center gap-x-[16px]"
         >
-          <UserGuideIcon
-            className={clsx(
-              "h-[24px] w-[24px] ",
-              page === "userGuide" ? "fill-blue" : "fill-black50",
-              "group-hover:fill-blue",
-            )}
-          />
-          <h1
-            className={clsx(
-              "text-p font-semibold",
-              "group-hover:text-blue",
-              page === "userGuide" ? "text-blue" : "text-black50",
-            )}
-          >
-            User Guide
-          </h1>
+          <div className="ml-[64px] flex items-center gap-x-[24px]">
+            <UserGuideIcon
+              className={clsx(
+                "h-[26px] w-[26px] group-hover:fill-blue",
+                page === "userGuide" ? "fill-blue" : "fill-black50",
+              )}
+            />
+            <h1
+              className={clsx(
+                "text-p font-bold group-hover:text-black",
+                page === "userGuide" ? "text-black" : "text-black50",
+              )}
+            >
+              User Guide
+            </h1>
+          </div>
         </button>
 
+        {/* HISTORY */}
         <button
+          className={clsx(
+            "group flex h-[47px] w-full",
+            page === "history" ? "bg-sky-100" : "",
+          )}
           onClick={() => changePage("history", 3)}
-          className="group flex w-full  items-center gap-x-[16px]"
         >
-          <HistoryIcon
-            className={clsx(
-              "h-[24px] w-[24px]  stroke-[1px]",
-              "group-hover:fill-blue group-hover:stroke-blue",
-              page === "history"
-                ? "fill-blue stroke-blue"
-                : "fill-black50 stroke-black50",
-            )}
-          />
-          <h1
-            className={clsx(
-              "text-p font-semibold",
-              "group-hover:text-blue",
-              page === "history" ? "text-blue" : "text-black50",
-            )}
-          >
-            History
-          </h1>
+          <div className="ml-[64px] flex items-center gap-x-[24px]">
+            <HistoryIcon
+              className={clsx(
+                "h-[26px] w-[26px] group-hover:fill-blue group-hover:stroke-blue ",
+                page === "history"
+                  ? "fill-blue stroke-blue "
+                  : "fill-black50 stroke-black50 ",
+              )}
+            />
+            <h1
+              className={clsx(
+                "text-p font-bold group-hover:text-black",
+                page === "history" ? "text-black" : "text-black50",
+              )}
+            >
+              History
+            </h1>
+          </div>
         </button>
       </div>
     </section>

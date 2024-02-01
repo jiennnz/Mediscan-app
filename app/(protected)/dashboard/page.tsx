@@ -9,7 +9,7 @@ const Page = () => {
   const { page } = useNavContext();
 
   return (
-    <div>
+    <div className="h-full p-[32px]">
       {page === "dashboard" && <Dashboard />}
       {page === "diagnose" && <Diagnose />}
       {page === "userGuide" && <UserGuide />}

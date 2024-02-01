@@ -1,13 +1,13 @@
 import SideNav from "@/components/Side_Navigation/SideNav";
-import { NavContextProvider } from "@/context/contexts";
+import { MainPageProvider } from "@/context/contexts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen">
-      <NavContextProvider>
+    <div className="flex h-screen w-screen">
+      <MainPageProvider>
         <SideNav />
-        <div>{children}</div>
-      </NavContextProvider>
+        <div className=" flex-grow">{children}</div>
+      </MainPageProvider>
     </div>
   );
 }

@@ -1,7 +1,12 @@
 import React from "react";
+import HeaderTab from "./components/HeaderTab";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <section>
+      <HeaderTab title="Dashboard" isDashboard />
+    </section>
+  );
 };
 
 export default Dashboard;

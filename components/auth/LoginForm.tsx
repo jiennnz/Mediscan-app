@@ -1,14 +1,20 @@
 "use client";
 
+import dbConnect from "@/lib/dbConnect";
 import { LoginSchema, loginSchema } from "@/types/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import { User, useUserContext } from "@/context/contexts";
 
 const LoginForm = () => {
   const router = useRouter();
+  const { setUser } = useUserContext();
 
   const {
     register,
@@ -34,6 +40,14 @@ const LoginForm = () => {
     // Wait for the promise to resolve
     try {
       const response = await myPromise;
+      const token: any = Cookies.get("token");
+      const decoded: any = jwt.decode(token);
+      const user: User = {
+        id: decoded?.id,
+        username: decoded?.username,
+        email: decoded?.email,
+      };
+      setUser(user);
       router.push("/dashboard");
       console.log(response);
     } catch (error) {
