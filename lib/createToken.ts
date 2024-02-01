@@ -15,7 +15,7 @@ export function createToken(userData: UserDataType) {
   };
 
   const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-    expiresIn: "30seconds",
+    expiresIn: "24h",
   });
 
   return token;

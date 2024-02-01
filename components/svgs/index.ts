@@ -1,0 +1,9 @@
+export { default as DashboardIcon } from "./Dashboard.svg";
+export { default as DiagnoseIcon } from "./Diagnose.svg";
+export { default as UserGuideIcon } from "./UserGuide.svg";
+export { default as HistoryIcon } from "./History.svg";
+export { default as SettingsIcon } from "./Settings.svg";
+export { default as LogoutIcon } from "./Logout.svg";
+export { default as PdfIcon } from "./Pdf.svg";
+export { default as DeleteIcon } from "./Delete.svg";
+export { default as EditIcon } from "./Edit.svg";

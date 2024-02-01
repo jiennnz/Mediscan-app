@@ -12,3 +12,24 @@ body {
     linear-gradient(127deg, #007acc 14.2%, rgba(0, 204, 153, 0.6) 83.22%)
   );
 }
+
+.box-shadow-sidenav {
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes lineMove {
+  from {
+    transform: translateY(var(--startY));
+  }
+  to {
+    transform: translateY(var(--endY));
+  }
+}
+
+.active-line {
+  animation-name: lineMove;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  /* Other styles for the active line */
+}
