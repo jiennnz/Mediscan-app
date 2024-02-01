@@ -10,9 +10,8 @@ import toast from "react-hot-toast";
 const SideNav = () => {
   const router = useRouter();
 
-  const myPromise = axios.get("/api/auth/logout");
-
   const onLogout = async () => {
+    const myPromise = axios.get("/api/auth/logout");
     await toast.promise(myPromise, {
       loading: "Logging you out...",
       success: "See you again!",
@@ -25,6 +24,7 @@ const SideNav = () => {
 
     try {
       const response = await myPromise;
+      console.log(response.data.success);
       if (response.data.success) {
         router.push("/");
       }
