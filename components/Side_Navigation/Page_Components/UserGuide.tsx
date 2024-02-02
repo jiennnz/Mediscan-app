@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import HeaderTab from "./components/HeaderTab";
 
 const UserGuide = () => {
   return (
-    <div>UserGuide</div>
-  )
-}
+    <section>
+      <HeaderTab title="User Guide"  />
+    </section>
+  );
+};
 
-export default UserGuide
+export default UserGuide;

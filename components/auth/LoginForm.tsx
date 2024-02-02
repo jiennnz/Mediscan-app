@@ -48,6 +48,7 @@ const LoginForm = () => {
         email: decoded?.email,
       };
       setUser(user);
+      console.log(user);
       router.push("/dashboard");
       console.log(response);
     } catch (error) {
