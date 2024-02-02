@@ -1,6 +1,6 @@
 "use client";
 
-import { NavComponents, useNavContext } from "@/context/contexts";
+import { useHeaderTabContext } from "@/context/contexts";
 import React, { useState } from "react";
 import {
   DashboardIcon,
@@ -9,14 +9,16 @@ import {
   UserGuideIcon,
 } from "../svgs";
 import clsx from "clsx";
+import Link from "next/link";
+import { HeaderTabType } from "@/types/types";
 
 const NavLinks = () => {
-  const { page, setPage } = useNavContext();
+  const { page, setPage } = useHeaderTabContext();
   const [linePosition, setLinePosition] = useState(0);
   const [startY, setStartY] = useState(0);
   const [endY, setEndY] = useState(0);
 
-  const changePage = (page: NavComponents, index: number) => {
+  const changePage = (page: HeaderTabType, index: number) => {
     setLinePosition(index);
     setStartY(linePosition * 64);
     setEndY(index * 63);
@@ -44,12 +46,14 @@ const NavLinks = () => {
       </div>
       <div className=" flex h-full w-full flex-col gap-y-[16px]">
         {/* DASHBOARD */}
-        <button
+        <Link
           className={clsx(
             "group flex h-[47px] w-full",
             page === "dashboard" ? "bg-sky-100" : "",
           )}
           onClick={() => changePage("dashboard", 0)}
+          key={"dashboard"}
+          href={"/dashboard"}
         >
           <div className="ml-[64px] flex items-center gap-x-[24px]">
             <DashboardIcon
@@ -67,15 +71,17 @@ const NavLinks = () => {
               Overview
             </h1>
           </div>
-        </button>
+        </Link>
 
         {/* DIAGNOSE */}
-        <button
+        <Link
           className={clsx(
             "group flex h-[47px] w-full",
             page === "diagnose" ? "bg-sky-100" : "",
           )}
           onClick={() => changePage("diagnose", 1)}
+          key={"diagnose"}
+          href={"/diagnose"}
         >
           <div className="ml-[64px] flex items-center gap-x-[24px]">
             <DiagnoseIcon
@@ -95,15 +101,17 @@ const NavLinks = () => {
               Diagnose
             </h1>
           </div>
-        </button>
+        </Link>
 
         {/* USER GUIDE */}
-        <button
+        <Link
           className={clsx(
             "group flex h-[47px] w-full",
             page === "userGuide" ? "bg-sky-100" : "",
           )}
           onClick={() => changePage("userGuide", 2)}
+          key={"user-guide"}
+          href={"/user-guide"}
         >
           <div className="ml-[64px] flex items-center gap-x-[24px]">
             <UserGuideIcon
@@ -121,15 +129,17 @@ const NavLinks = () => {
               User Guide
             </h1>
           </div>
-        </button>
+        </Link>
 
         {/* HISTORY */}
-        <button
+        <Link
           className={clsx(
             "group flex h-[47px] w-full",
             page === "history" ? "bg-sky-100" : "",
           )}
           onClick={() => changePage("history", 3)}
+          key={"history"}
+          href={"/history"}
         >
           <div className="ml-[64px] flex items-center gap-x-[24px]">
             <HistoryIcon
@@ -149,7 +159,7 @@ const NavLinks = () => {
               History
             </h1>
           </div>
-        </button>
+        </Link>
       </div>
     </section>
   );

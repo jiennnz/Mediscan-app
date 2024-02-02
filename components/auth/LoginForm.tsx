@@ -10,7 +10,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-import { User, useUserContext } from "@/context/contexts";
+import { useUserContext } from "@/context/contexts";
+import { UserType } from "@/types/types";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -40,12 +41,12 @@ const LoginForm = () => {
     // Wait for the promise to resolve
     try {
       const response = await myPromise;
-      const token: any = Cookies.get("token");
-      const decoded: any = jwt.decode(token);
-      const user: User = {
-        id: decoded?.id,
-        username: decoded?.username,
-        email: decoded?.email,
+      const session = await axios.get("/api/user/session");
+
+      const user: UserType = {
+        id: session.data.user._id,
+        username: session.data.user.username,
+        email: session.data.user.email,
       };
       setUser(user);
       console.log(user);

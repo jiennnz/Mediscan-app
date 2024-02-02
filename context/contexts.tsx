@@ -1,63 +1,44 @@
 "use client";
 
-import { ObjectId } from "mongodb";
+import {
+  DashboardContextType,
+  DashboardType,
+  HeaderTabContextType,
+  HeaderTabType,
+  MainPageProviderProps,
+  UserContextType,
+  UserType,
+} from "@/types/types";
 import React, { createContext, useContext, useState } from "react";
 
-type ProviderProps = {
-  children: React.ReactNode;
-};
-
-export type NavComponents = "dashboard" | "diagnose" | "userGuide" | "history";
-export type DashboardType = "global" | "personal";
-export type User = {
-  id: ObjectId;
-  username: string;
-  email: string;
-};
-
-type UserContext = {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-};
-
-type NavContext = {
-  page: NavComponents;
-  setPage: React.Dispatch<React.SetStateAction<NavComponents>>;
-};
-
-type DashboardTypeContext = {
-  dashboardState: DashboardType;
-  setDashboardState: React.Dispatch<React.SetStateAction<DashboardType>>;
-};
-
-export const NavContext = createContext<NavContext | null>(null);
-export const DashboardTypeContext = createContext<DashboardTypeContext | null>(
+export const HeaderTabContext = createContext<HeaderTabContextType | null>(
   null,
 );
-export const UserContext = createContext<UserContext | null>(null);
+export const DashboardContext = createContext<DashboardContextType | null>(
+  null,
+);
+export const UserContext = createContext<UserContextType | null>(null);
 
-export function MainPageProvider({ children }: ProviderProps) {
-  const [page, setPage] = useState<NavComponents>("dashboard");
+export function MainPageProvider({ children }: MainPageProviderProps) {
+  const [page, setPage] = useState<HeaderTabType>("dashboard");
   const [dashboardState, setDashboardState] = useState<DashboardType>("global");
 
   return (
-    <NavContext.Provider
+    <HeaderTabContext.Provider
       value={{
         page,
         setPage,
       }}
     >
-      <DashboardTypeContext.Provider
-        value={{ dashboardState, setDashboardState }}
-      >
+      <DashboardContext.Provider value={{ dashboardState, setDashboardState }}>
         {children}
-      </DashboardTypeContext.Provider>
-    </NavContext.Provider>
+      </DashboardContext.Provider>
+    </HeaderTabContext.Provider>
   );
 }
 
-export function AuthProvider({ children }: ProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children }: MainPageProviderProps) {
+  const [user, setUser] = useState<UserType | null>(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -66,8 +47,8 @@ export function AuthProvider({ children }: ProviderProps) {
   );
 }
 
-export function useNavContext() {
-  const context = useContext(NavContext);
+export function useHeaderTabContext() {
+  const context = useContext(HeaderTabContext);
   if (!context) {
     throw new Error("useNavContext must be used within a NavContextProvider");
   }
@@ -76,7 +57,7 @@ export function useNavContext() {
 }
 
 export function useDashboardTypeContext() {
-  const context = useContext(DashboardTypeContext);
+  const context = useContext(DashboardContext);
   if (!context) {
     throw new Error(
       "useDashBoardTypeContext must be used within a DashBoardTypeContextProvider",

@@ -1,10 +1,12 @@
+"use client";
+
 import {
-  User,
   useDashboardTypeContext,
+  useHeaderTabContext,
   useUserContext,
 } from "@/context/contexts";
 import clsx from "clsx";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Time from "./Time";
 import jwt from "jsonwebtoken";
@@ -13,20 +15,26 @@ type HeaderTabType = {
   isDashboard?: boolean;
 };
 
-const HeaderTab = ({ title, isDashboard }: HeaderTabType) => {
+const HeaderTab = ({}: HeaderTabType) => {
   const { dashboardState, setDashboardState } = useDashboardTypeContext();
+  const { page } = useHeaderTabContext();
   const { user } = useUserContext();
-  const GreenBox = () => {
-    return (
-      <div className="absolute h-[40.5px] w-[50px] bg-emerald-200  opacity-50"></div>
-    );
-  };
 
   return (
     <section className="flex h-[100px] items-center justify-between rounded-[20px] border border-black10 bg-white px-[32px]">
       <div className="flex items-end gap-x-[16px]">
-        <h1 className=" text-h1 font-bold text-blue">{title}</h1>
-        {isDashboard && (
+        <h1 className=" text-h1 font-bold text-blue">
+          {page === "dashboard"
+            ? "Dashboard"
+            : page === "diagnose"
+              ? "Pneumonia Diagnosis"
+              : page === "userGuide"
+                ? "User Guide"
+                : page === "history"
+                  ? "History"
+                  : ""}
+        </h1>
+        {page === "dashboard" && (
           <div className="relative flex h-[60px] items-center gap-x-[16px]">
             <div className=" flex items-center gap-x-[4px]">
               <button
